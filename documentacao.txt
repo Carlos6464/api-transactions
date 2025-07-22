@@ -1,0 +1,93 @@
+Comando criar ambiente para desenvolvimento  
+python -m venv venv
+
+
+
+
+
+Comandos para iniciar o ambiente 
+linux = source venv/bin/activate
+windows = venv\Script\activate.bat
+
+
+
+
+
+Comando para iniciar o servido
+python manage.py runserver
+
+
+
+
+
+Instalando dependências
+Django = pip install Django==5.0.3
+Myql = pip install mysqlclient
+
+Djangorest = pip install djangorestframework
+Markdown = pip install markdown 
+
+dotenv = pip install python-dotenv
+
+
+
+
+
+
+Adicionando as dependências em um arquivo
+pip freeze > requirements.txt
+
+
+
+
+
+
+
+Comando para criar o app e o admin
+admin = django-admin startproject setup .
+app = python3 manage.py startapp transaction
+
+
+
+
+Configurando o settings.py para atualizar a INSTALLED_APPS  inserindo o app que é a pasta transactions e o framework djangorestframework
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    'transaction',
+    'rest_framework',
+]
+
+
+Configurando o settings.py para usar o mysql
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'seu_banco_de_dados',
+        'USER': 'seu_usuario',
+        'PASSWORD': 'sua_senha',
+        'HOST': '127.0.0.1',  # Ou o IP/host do seu servidor de banco
+        'PORT': '3306',      # A porta padrão do MySQL
+    }
+}
+
+Configugrando para usar as variaveis de ambiente
+import os
+from dotenv import load_dotenv
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
+
