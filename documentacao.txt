@@ -28,7 +28,7 @@ Djangorest = pip install djangorestframework
 Markdown = pip install markdown 
 
 dotenv = pip install python-dotenv
-
+pip install python-decouple
 
 
 
@@ -67,12 +67,13 @@ INSTALLED_APPS = [
 Configurando o settings.py para usar o mysql
 DATABASES = {
     'default': {
+       
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'seu_banco_de_dados',
-        'USER': 'seu_usuario',
-        'PASSWORD': 'sua_senha',
-        'HOST': '127.0.0.1',  # Ou o IP/host do seu servidor de banco
-        'PORT': '3306',      # A porta padrão do MySQL
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', cast=int),
     }
 }
 
@@ -80,14 +81,10 @@ Configugrando para usar as variaveis de ambiente
 import os
 from dotenv import load_dotenv
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-    }
-}
+
+
+
+Comados para fazer a migração no banco de dados
+python manage.py makemigrations
+python manage.py migrate
 
