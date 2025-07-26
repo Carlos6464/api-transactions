@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings 
+from django.utils import timezone
 
 
 
@@ -22,6 +23,7 @@ class Transacions(models.Model):
     )
     description = models.CharField(max_length=255, blank=False)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    due_date = models.DateField(blank=False, default=timezone.now)
     nature = models.IntegerField(choices=NATURE, blank=False)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

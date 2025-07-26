@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 class TransacionsAdmin(admin.ModelAdmin):
-    list_display = ('id','description', 'value', 'nature', 'created_at')
+    list_display = ('id','description', 'value', 'nature','due_date', 'category', 'created_at')
     list_display_links = ('id','description',)
     list_per_page = 10
     search_fields = ('description',)
