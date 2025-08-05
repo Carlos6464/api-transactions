@@ -1,11 +1,19 @@
 from django.http import JsonResponse
+from transaction.models import Transacions, Category
+from transaction.serializers import TransacionsSerializer, CategorySerializer
+from rest_framework import viewsets
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
-def transactions(request):
-    if request.method == 'GET':
-        data = {
-            'transactions': [
-                {'id': 1, 'amount': 100.00, 'currency': 'USD'},
-                {'id': 2, 'amount': 200.00, 'currency': 'EUR'},
-            ]
-        }
-        return JsonResponse(data)
+
+class TransacionsViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Transacions.objects.all()
+    serializer_class = TransacionsSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
