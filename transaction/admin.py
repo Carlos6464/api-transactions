@@ -6,6 +6,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = ('id','name',)
     list_per_page = 10
     search_fields = ('name',)
+    ordering = ('name',)
 
 admin.site.register(Category, CategoryAdmin)
 
@@ -14,5 +15,6 @@ class TransacionsAdmin(admin.ModelAdmin):
     list_display_links = ('id','description',)
     list_per_page = 10
     search_fields = ('description',)
+    ordering = ('due_date',)
 
 admin.site.register(Transacions, TransacionsAdmin)

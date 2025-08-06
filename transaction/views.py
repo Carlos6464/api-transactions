@@ -1,19 +1,19 @@
 from django.http import JsonResponse
 from transaction.models import Transacions, Category
 from transaction.serializers import TransacionsSerializer, CategorySerializer
-from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class TransacionsViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+   
     queryset = Transacions.objects.all()
     serializer_class = TransacionsSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = [ 'due_date']
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+   
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
